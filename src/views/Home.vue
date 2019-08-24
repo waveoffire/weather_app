@@ -1,18 +1,136 @@
+
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div class="AirApp"><img src="/image/cloud.png" /><b> AirApp</b></div>
+    <div class="description">
+      Check the weather! Enter the city name, or
+      <b>leave empty for geolocation</b>
+    </div>
+    <div class="search">
+      <input type="text" v-model="city" /><button>CHECK</button>
+    </div>
+    <div class="homeTemp">
+      <div class="degrees">29 °C</div>
+      <div class="location">
+        <p><b>Date:</b> 22.08.2019</p>
+        <p><b>Location:</b> Poznań,PL</p>
+        <p><b>Description:</b> sunny</p>
+      </div>
+      <div class="more"><b>MORE</b></div>
+    </div>
+    <div class="footer">
+      Photo from <b><u>UNSPLASH</u></b>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-@Component({
-  components: {
-    HelloWorld,
+<script>
+export default {
+  data() {
+    return {
+      city: "Poznań"
+    };
   },
-})
-export default class Home extends Vue {}
+  methods: {
+    check() {}
+  }
+};
 </script>
+
+<style lang="scss" scoped>
+.footer {
+  position: fixed;
+  height: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+$primary_color: #fafafa;
+$secondary_color: #d3d3d3;
+.home {
+  width: 600px;
+  margin: auto;
+}
+.AirApp {
+  padding-top: 25vh;
+  font-size: 6em;
+  font-family: "Averia Sans Libre", cursive;
+  img {
+    height: 80px;
+  }
+}
+.description {
+  color: $secondary_color;
+  font-size: 1.3em;
+}
+.search {
+  input {
+    background-color: hsla(0, 0%, 100%, 0.122);
+    border: 1px solid $secondary_color;
+    height: 40px;
+    width: 440px;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 15px 10px 15px 0;
+
+    color: $primary_color;
+    font-size: 1.5em;
+    &:focus {
+      outline: none !important;
+      box-shadow: 0 0 2px #ffffff;
+    }
+  }
+  button {
+    background-color: hsla(0, 0%, 100%, 0.623);
+    border: 1px solid $secondary_color;
+    height: 40px;
+    width: 140px;
+    box-sizing: border-box;
+    color: $primary_color;
+    font-size: 1.5em;
+    margin-left: 10px;
+    &:hover {
+      outline: none !important;
+      box-shadow: 0 0 2px #ffffff;
+    }
+    &:focus {
+      outline: none !important;
+      box-shadow: 0 0 2px #ffffff;
+    }
+  }
+}
+.homeTemp {
+  background-color: hsla(0, 0%, 75%, 0.315);
+  height: 150px;
+  box-sizing: border-box;
+  width: 600px;
+  .degrees {
+    font-family: "Averia Sans Libre", cursive;
+    height: 150px;
+    width: 200px;
+    display: inline-block;
+    padding-left: 15px;
+    font-size: 4em;
+    box-sizing: border-box;
+    position: relative;
+    top: -27px;
+  }
+  .location {
+    height: 150px;
+    width: 310px;
+    display: inline-block;
+    padding-left: 15px;
+    text-align: left;
+    box-sizing: border-box;
+    font-size: 1.1em;
+    padding-top: 7px;
+  }
+  .more {
+    height: 20px;
+    width: 50px;
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 1.2em;
+  }
+}
+</style>
