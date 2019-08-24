@@ -1,6 +1,10 @@
 <template>
   <div class="app">
-    <div class="AirApp"><img src="/image/cloud.png" /><b> AirApp</b></div>
+    <router-link class="link" :to="{ name: 'home' }"
+      ><div class="AirApp">
+        <img src="/image/cloud.png" /><b>AirApp</b>
+      </div></router-link
+    >
     <div class="error" v-if="error == true">{{ errormessage }}</div>
     <div class="info" v-if="error == false">
       <div class="date">
@@ -39,6 +43,7 @@ export default {
     };
   },
   mounted() {
+    document.title = "AirApp - " + this.city;
     //zapytanie do api
     this.$http
       .get(
@@ -57,6 +62,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.link {
+  color: #fafafa;
+  text-decoration: none;
+  &:hover {
+    color: #fafafa;
+  }
+}
 .legend {
   font-size: 1.2em;
   .column {

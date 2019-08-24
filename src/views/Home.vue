@@ -34,6 +34,9 @@ export default {
     check() {
       this.$router.push({ name: "Details", query: { city: this.city } });
     }
+  },
+  mounted() {
+    document.title = "AirApp";
   }
 };
 </script>
