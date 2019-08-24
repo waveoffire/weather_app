@@ -7,7 +7,9 @@
       <b>leave empty for geolocation</b>
     </div>
     <div class="search">
-      <input type="text" v-model="city" /><button>CHECK</button>
+      <input type="text" v-model="city" /><button @click="check()">
+        CHECK
+      </button>
     </div>
     <div class="homeTemp">
       <div class="degrees">29 °C</div>
@@ -18,9 +20,6 @@
       </div>
       <div class="more"><b>MORE</b></div>
     </div>
-    <div class="footer">
-      Photo from <b><u>UNSPLASH</u></b>
-    </div>
   </div>
 </template>
 
@@ -28,23 +27,18 @@
 export default {
   data() {
     return {
-      city: "Poznań"
+      city: ""
     };
   },
   methods: {
-    check() {}
+    check() {
+      this.$router.push({ name: "Details", query: { city: this.city } });
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  position: fixed;
-  height: 30px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
 $primary_color: #fafafa;
 $secondary_color: #d3d3d3;
 .home {
