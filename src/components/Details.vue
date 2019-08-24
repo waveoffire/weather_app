@@ -20,15 +20,12 @@
       <div class="column"><b>Description</b></div>
     </div>
     <!-- for wyswietlajacy liste temperatur  -->
-    <div
-      v-for="(list, index) in data.list"
-      :key="index"
-      class="hourly"
-      v-if="error == false"
-    >
-      <div class="column">{{ list.dt | moment("HH:mm") }}</div>
-      <div class="column">{{ Math.round(list.main.temp) }} °C</div>
-      <div class="column">{{ list.weather[0].description }}</div>
+    <div v-if="error == false">
+      <div v-for="(list, index) in data.list" :key="index" class="hourly">
+        <div class="column">{{ list.dt | moment("HH:mm") }}</div>
+        <div class="column">{{ Math.round(list.main.temp) }} °C</div>
+        <div class="column">{{ list.weather[0].description }}</div>
+      </div>
     </div>
   </div>
 </template>

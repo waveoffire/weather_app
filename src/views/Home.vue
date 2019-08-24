@@ -12,13 +12,18 @@
       </button>
     </div>
     <div class="homeTemp">
-      <div class="degrees">29 °C</div>
-      <div class="location">
-        <p><b>Date:</b> 22.08.2019</p>
-        <p><b>Location:</b> Poznań,PL</p>
-        <p><b>Description:</b> sunny</p>
+      <div v-if="data.name" class="degrees">
+        {{ Math.round(data.main.temp) }} °C
       </div>
-      <div class="more"><b>MORE</b></div>
+      <div v-if="data.name" class="location">
+        <p><b>Date:</b> 22.08.2019</p>
+        <p><b>Location:</b> {{ data.name }}, {{ data.sys.country }}</p>
+        <p><b>Description:</b> {{ data.weather[0].description }}</p>
+      </div>
+      <div v-if="data.name" class="more"><b>MORE</b></div>
+      <div v-else class="error">
+        No data, accept localization please.
+      </div>
     </div>
   </div>
 </template>
@@ -27,16 +32,43 @@
 export default {
   data() {
     return {
-      city: ""
+      city: "",
+      position: {},
+      data: {}
     };
   },
   methods: {
+    getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          this.position = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          this.$http
+            .get(
+              `http://api.openweathermap.org/data/2.5/weather?lat=${this.position.latitude}&lon=${this.position.longitude}&units=metric&APPID=831062d6e8b081d6572a60459e1c793e`
+            )
+            .then(
+              response => {
+                this.data = response.body;
+              },
+              response => {
+                this.error = true;
+                this.errormessage = response.body.message;
+              }
+            );
+        });
+      }
+      return this.position;
+    },
     check() {
       this.$router.push({ name: "Details", query: { city: this.city } });
     }
   },
   mounted() {
     document.title = "AirApp";
+    this.getLocation();
   }
 };
 </script>
@@ -44,6 +76,10 @@ export default {
 <style lang="scss" scoped>
 $primary_color: #fafafa;
 $secondary_color: #d3d3d3;
+.error {
+  font-size: 2em;
+  line-height: 150px;
+}
 .home {
   width: 600px;
   margin: auto;
