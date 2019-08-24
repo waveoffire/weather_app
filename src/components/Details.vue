@@ -103,7 +103,7 @@ export default {
 .error {
   background-color: hsla(0, 0%, 75%, 0.315);
   height: 200px;
-  font-size: 5em;
+  font-size: 2em;
   line-height: 200px;
   margin-top: 50px;
 }

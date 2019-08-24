@@ -7,7 +7,10 @@
       <b>leave empty for geolocation</b>
     </div>
     <div class="search">
-      <input type="text" v-model="city" /><button @click="check()">
+      <input type="text" v-model="city" /><button
+        class="check"
+        @click="check()"
+      >
         CHECK
       </button>
     </div>
@@ -20,7 +23,7 @@
         <p><b>Location:</b> {{ data.name }}, {{ data.sys.country }}</p>
         <p><b>Description:</b> {{ data.weather[0].description }}</p>
       </div>
-      <div v-if="data.name" class="more"><b>MORE</b></div>
+      <div v-if="data.name" class="more"><b @click="more()">MORE</b></div>
       <div v-else class="error">
         No data, accept localization please.
       </div>
@@ -38,6 +41,7 @@ export default {
     };
   },
   methods: {
+    //pobiera lokalizacje i wysyła zapytanie do bazy danych
     getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -62,8 +66,12 @@ export default {
       }
       return this.position;
     },
+    //przycisk CHECK - przejscie do podstrony deatails
     check() {
       this.$router.push({ name: "Details", query: { city: this.city } });
+    },
+    more() {
+      this.$router.push({ name: "Details", query: { city: this.data.name } });
     }
   },
   mounted() {
@@ -76,6 +84,12 @@ export default {
 <style lang="scss" scoped>
 $primary_color: #fafafa;
 $secondary_color: #d3d3d3;
+.check {
+  cursor: pointer;
+}
+.more {
+  cursor: pointer;
+}
 .error {
   font-size: 2em;
   line-height: 150px;
