@@ -7,10 +7,13 @@
       <b>leave empty for geolocation</b>
     </div>
     <div class="search">
-      <input type="text" v-model="city" /><button
-        class="check"
-        @click="check()"
-      >
+      <input
+        id="search"
+        placeholder="Search..."
+        ref="autocomplete"
+        type="text"
+        v-model="city"
+      /><button class="check" @click="check()">
         CHECK
       </button>
     </div>
@@ -37,7 +40,8 @@ export default {
     return {
       city: "",
       position: {},
-      data: {}
+      data: {},
+      autocomplete: {}
     };
   },
   methods: {
@@ -66,30 +70,67 @@ export default {
       }
       return this.position;
     },
-    //przycisk CHECK - przejscie do podstrony deatails
+    //przycisk CHECK - przejscie do podstrony details
     check() {
+      //pobranie miasta z autocomplete
+      if (this.autocomplete.getPlace()) {
+        let place = this.autocomplete.getPlace();
+        let ac = place.address_components;
+        this.city = ac[0]["short_name"];
+      }
       this.$router.push({ name: "Details", query: { city: this.city } });
     },
     more() {
       this.$router.push({ name: "Details", query: { city: this.data.name } });
     }
   },
+
   mounted() {
+    //init autocomplete
+    this.autocomplete = new google.maps.places.Autocomplete(
+      this.$refs.autocomplete,
+      { types: ["geocode"] }
+    );
     document.title = "AirApp";
     this.getLocation();
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 $primary_color: #fafafa;
 $secondary_color: #d3d3d3;
-.check {
-  cursor: pointer;
+/* autocomplete css */
+.pac-container {
+  background-color: hsla(0, 0%, 0%, 0.801);
 }
-.more {
-  cursor: pointer;
+.pac-icon,
+.pac-item-query {
+  color: $primary_color;
 }
+.pac-matched {
+  color: #b6b6b6;
+}
+.pac-item {
+  background-color: hsla(0, 0%, 0%, 0.795);
+  &:hover {
+    background-color: hsla(0, 0%, 31%, 0.795);
+  }
+}
+::placeholder {
+  color: $secondary_color;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: $secondary_color;
+}
+
+::-ms-input-placeholder {
+  color: $secondary_color;
+}
+/* -------------- */
+
 .error {
   font-size: 2em;
   line-height: 150px;
@@ -128,6 +169,7 @@ $secondary_color: #d3d3d3;
     }
   }
   button {
+    cursor: pointer;
     background-color: hsla(0, 0%, 100%, 0.623);
     border: 1px solid $secondary_color;
     height: 40px;
@@ -178,6 +220,7 @@ $secondary_color: #d3d3d3;
     display: inline-block;
     box-sizing: border-box;
     font-size: 1.2em;
+    cursor: pointer;
   }
 }
 </style>

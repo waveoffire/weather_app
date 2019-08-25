@@ -6,7 +6,7 @@
       </div></router-link
     >
     <div class="error" v-if="error == true">{{ errormessage }}</div>
-    <div class="info" v-if="error == false">
+    <div class="info" v-if="error == false && data.list">
       <div class="date">
         <b>Date:</b> {{ data.list[0].dt | moment("DD.MM.YYYY") }}
       </div>
