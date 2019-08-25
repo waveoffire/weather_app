@@ -136,8 +136,7 @@ $secondary_color: #d3d3d3;
   line-height: 150px;
 }
 .home {
-  width: 600px;
-  margin: auto;
+  width: 100%;
 }
 .AirApp {
   padding-top: 25vh;
@@ -156,7 +155,7 @@ $secondary_color: #d3d3d3;
     background-color: hsla(0, 0%, 100%, 0.122);
     border: 1px solid $secondary_color;
     height: 40px;
-    width: 440px;
+    width: 70%;
     box-sizing: border-box;
     padding: 10px;
     margin: 15px 10px 15px 0;
@@ -173,7 +172,7 @@ $secondary_color: #d3d3d3;
     background-color: hsla(0, 0%, 100%, 0.623);
     border: 1px solid $secondary_color;
     height: 40px;
-    width: 140px;
+    width: 26%;
     box-sizing: border-box;
     color: $primary_color;
     font-size: 1.5em;
@@ -192,11 +191,11 @@ $secondary_color: #d3d3d3;
   background-color: hsla(0, 0%, 75%, 0.315);
   height: 150px;
   box-sizing: border-box;
-  width: 600px;
+  width: 100%;
   .degrees {
     font-family: "Averia Sans Libre", cursive;
     height: 150px;
-    width: 200px;
+    width: 30%;
     display: inline-block;
     padding-left: 15px;
     font-size: 4em;
@@ -206,7 +205,7 @@ $secondary_color: #d3d3d3;
   }
   .location {
     height: 150px;
-    width: 310px;
+    width: 50%;
     display: inline-block;
     padding-left: 15px;
     text-align: left;
@@ -216,11 +215,46 @@ $secondary_color: #d3d3d3;
   }
   .more {
     height: 20px;
-    width: 50px;
+    width: 20%;
     display: inline-block;
     box-sizing: border-box;
     font-size: 1.2em;
     cursor: pointer;
+  }
+}
+/* reponsive */
+@media (max-width: 650px) {
+  .AirApp {
+    padding-top: 20px;
+    font-size: 3em;
+  }
+  .description {
+    font-size: 1.1em;
+  }
+  .check {
+    width: 33% !important;
+  }
+  #search {
+    width: 60%;
+  }
+  .degrees {
+    top: 0;
+    margin: auto;
+    font-size: 1.8em !important;
+  }
+  .location {
+    font-size: 1em !important;
+    margin: auto;
+    p {
+      margin: 5px 0 5px 0 !important;
+    }
+  }
+  .more {
+    margin: auto;
+    font-size: 1em !important;
+  }
+  .error {
+    font-size: 1.2em;
   }
 }
 </style>

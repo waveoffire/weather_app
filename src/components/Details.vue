@@ -16,7 +16,9 @@
     </div>
     <div class="legend" v-if="error == false">
       <div class="column"><b>Hour</b></div>
-      <div class="column"><b>Temperature</b></div>
+      <div class="column">
+        <b class="temperature">Temperature</b> <b class="temp">Temp</b>
+      </div>
       <div class="column"><b>Description</b></div>
     </div>
     <!-- for wyswietlajacy liste temperatur  -->
@@ -59,6 +61,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.temp {
+  display: none;
+}
 .link {
   color: #fafafa;
   text-decoration: none;
@@ -70,7 +75,7 @@ export default {
   font-size: 1.2em;
   .column {
     display: inline-block;
-    width: 190px;
+    width: 31.6%;
     height: 60px;
     line-height: 90px;
     margin: 10px 10px 0 10px;
@@ -87,7 +92,7 @@ export default {
   font-size: 1.2em;
   .column {
     display: inline-block;
-    width: 190px;
+    width: 31.6%;
     height: 60px;
     line-height: 60px;
     margin: 10px 10px 0 10px;
@@ -109,21 +114,21 @@ export default {
 }
 .info {
   background-color: hsla(0, 0%, 75%, 0.315);
-
   font-size: 1.1em;
   margin: 15px 0 15px 0;
-  padding: 10px;
+  height: 60px;
+  line-height: 60px;
   .date {
     display: inline-block;
-    padding: 10px 50px 10px 0px;
+    padding: 0 50px 0 0px;
   }
   .location {
     display: inline-block;
-    padding: 10px 10px 10px 50px;
+    padding: 0 10px 0 50px;
   }
 }
 .app {
-  width: 600px;
+  width: 100%;
   margin: auto;
 }
 .AirApp {
@@ -133,6 +138,38 @@ export default {
   font-family: "Averia Sans Libre", cursive;
   img {
     height: 40px;
+  }
+}
+/* reponsive */
+@media (max-width: 650px) {
+  .info {
+    height: 120px;
+
+    font-size: 1.1em;
+
+    .date {
+      padding: 0;
+      width: 100%;
+    }
+    .location {
+      padding: 0;
+      width: 100%;
+    }
+  }
+  .column {
+    width: 20% !important;
+    &:nth-child(3n -2) {
+      width: 20% !important;
+    }
+    &:nth-child(3n + 0) {
+      width: 50% !important;
+    }
+  }
+  .temp {
+    display: inline;
+  }
+  .temperature {
+    display: none;
   }
 }
 </style>

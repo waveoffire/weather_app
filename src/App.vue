@@ -19,6 +19,13 @@
 <style lang="scss">
 $primary_color: #fafafa;
 $secondary_color: "#d3d3d3";
+#app {
+  max-width: 600px;
+  overflow: hidden;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
 .unsplash {
   color: $primary_color;
   &:hover {
@@ -31,6 +38,8 @@ $secondary_color: "#d3d3d3";
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: -1;
+  opacity: 0.5;
 }
 
 div.background {
@@ -43,7 +52,7 @@ div.background {
   position: fixed;
   left: -5px;
   right: -5px;
-  z-index: -1;
+  z-index: -2;
   top: -5px;
   bottom: -5px;
 }
@@ -53,5 +62,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: $primary_color;
   text-align: center;
+}
+/* reponsive */
+@media (max-width: 650px) {
+  #app {
+    width: 100%;
+    overflow: hidden;
+  }
 }
 </style>
