@@ -1,7 +1,7 @@
 # weather_app
 Zadanie rekrutacyjne dla appchance - aplikacja pogodowa
 
-Live: https://waveoffire.github.io/weather_app/
+Live: https://weather.smilgin.co.pl/
 ## Project setup
 ```
 yarn install
