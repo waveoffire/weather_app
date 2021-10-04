@@ -1,7 +1,7 @@
 # weather_app
 Zadanie rekrutacyjne dla appchance - aplikacja pogodowa
 
-Live: https://weather.smilgin.co.pl/
+Live: https://weather.smilgin.eu/
 ## Project setup
 ```
 yarn install
