@@ -38,7 +38,7 @@ export default {
       city: this.$route.query.city,
       data: {},
       error: false,
-      errormessage: ""
+      errormessage: "",
     };
   },
   mounted() {
@@ -46,18 +46,18 @@ export default {
     //zapytanie do api
     this.$http
       .get(
-        `http://api.openweathermap.org/data/2.5/forecast?q=${this.city}&units=metric&cnt=6&mode=json&APPID=831062d6e8b081d6572a60459e1c793e`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&units=metric&cnt=6&mode=json&APPID=831062d6e8b081d6572a60459e1c793e`
       )
       .then(
-        response => {
+        (response) => {
           this.data = response.body;
         },
-        response => {
+        (response) => {
           this.error = true;
           this.errormessage = response.body.message;
         }
       );
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

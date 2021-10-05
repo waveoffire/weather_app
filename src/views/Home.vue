@@ -13,9 +13,7 @@
         ref="autocomplete"
         type="text"
         v-model="city"
-      /><button class="check" @click="check()">
-        CHECK
-      </button>
+      /><button class="check" @click="check()">CHECK</button>
     </div>
     <div class="homeTemp">
       <div v-if="data.name" class="degrees">
@@ -27,9 +25,7 @@
         <p><b>Description:</b> {{ data.weather[0].description }}</p>
       </div>
       <div v-if="data.name" class="more"><b @click="more()">MORE</b></div>
-      <div v-else class="error">
-        No data, accept localization please.
-      </div>
+      <div v-else class="error">No data, accept localization please.</div>
     </div>
   </div>
 </template>
@@ -41,27 +37,27 @@ export default {
       city: "",
       position: {},
       data: {},
-      autocomplete: {}
+      autocomplete: {},
     };
   },
   methods: {
     //pobiera lokalizacje i wysyła zapytanie do bazy danych
     getLocation() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
+        navigator.geolocation.getCurrentPosition((position) => {
           this.position = {
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+            longitude: position.coords.longitude,
           };
           this.$http
             .get(
-              `http://api.openweathermap.org/data/2.5/weather?lat=${this.position.latitude}&lon=${this.position.longitude}&units=metric&APPID=831062d6e8b081d6572a60459e1c793e`
+              `https://api.openweathermap.org/data/2.5/weather?lat=${this.position.latitude}&lon=${this.position.longitude}&units=metric&APPID=831062d6e8b081d6572a60459e1c793e`
             )
             .then(
-              response => {
+              (response) => {
                 this.data = response.body;
               },
-              response => {
+              (response) => {
                 this.error = true;
                 this.errormessage = response.body.message;
               }
@@ -76,13 +72,15 @@ export default {
       if (this.autocomplete.getPlace()) {
         let place = this.autocomplete.getPlace();
         let ac = place.address_components;
-        this.city = ac[0]["short_name"];
+        if (ac) {
+          this.city = ac[0]["short_name"];
+        }
       }
       this.$router.push({ name: "Details", query: { city: this.city } });
     },
     more() {
       this.$router.push({ name: "Details", query: { city: this.data.name } });
-    }
+    },
   },
 
   mounted() {
@@ -93,7 +91,7 @@ export default {
     );
     document.title = "AirApp";
     this.getLocation();
-  }
+  },
 };
 </script>
 
